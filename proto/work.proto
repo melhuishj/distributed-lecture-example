@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package work;
+
+service Coordinator {
+  rpc GetWork(GetWorkRequest) returns (GetWorkResponse) {}
+  rpc WorkCompleted(WorkCompletedRequest) returns (WorkCompletedResponse) {}
+  rpc AddWork(AddWorkRequest) returns (AddWorkResponse) {}
+  rpc GetSummary(GetSummaryRequest) returns (GetSummaryResponse) {}
+}
+
+message Work {
+  uint32 work_size = 2;
+  uint32 work_complexity = 3;
+}
+
+message GetWorkRequest {
+  string worker_name = 1;
+}
+
+message GetWorkResponse {
+  string work_id = 1;
+  Work work = 2;
+}
+
+message WorkCompletedRequest {
+  string work_id = 1;
+}
+
+message WorkCompletedResponse {
+}
+
+message AddWorkRequest {
+  Work work = 1;
+}
+
+message AddWorkResponse {
+  string work_id = 1;
+}
+
+message GetSummaryRequest {
+}
+
+message GetSummaryResponse {
+  message WorkerLog {
+    string worker_name = 1;
+    repeated Work work_completed = 2;
+  }
+
+  repeated WorkerLog worker_log = 1;
+}
