@@ -48,4 +48,5 @@ message GetSummaryResponse {
   }
 
   repeated WorkerLog worker_log = 1;
+  repeated Work queued_work = 2;
 }

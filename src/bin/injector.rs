@@ -26,9 +26,6 @@ struct Args {
     work_complexity: u32,
 }
 
-#[derive(Default)]
-pub struct CoordinatorImpl {}
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
@@ -40,10 +37,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 work_complexity: args.work_complexity,
             }),
         });
-
-        let response = client.add_work(request).await?;
-
-        println!("RESPONSE={:?}", response);
+        let _response = client.add_work(request).await?;
         sleep(Duration::from_millis(args.frequency.into()));
     }
 }

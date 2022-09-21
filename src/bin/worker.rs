@@ -26,9 +26,6 @@ struct Args {
     cpu_speed: u32,
 }
 
-#[derive(Default)]
-pub struct CoordinatorImpl {}
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
@@ -42,7 +39,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         let response = response.into_inner();
         let work = response.work;
         if work.is_none() {
-            println!("No work, sleeping and trying again");
             sleep(Duration::from_millis(1000));
             continue;
         }
